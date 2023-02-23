@@ -39,8 +39,9 @@ public class LoginTestNegative extends BaseClass {
 
     @DataProvider(name = "negativeLoginExcel")
     public Object[][] loginData(){
-        return ExcelUtility.readFromExcel(Constants.TESTDATA_FILEPATH,"LoginNegativeTests");
+        return ExcelUtility.readFromExcel(Constants.TESTDATA_FILEPATH,"Sheet1");
     }
+
 
     @DataProvider
     Object[][] getData() {

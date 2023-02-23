@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Test Suite">
+    <listeners>
+        <listener class-name="com.exelenter.base.Listener"/>
+    </listeners>
+    <test name="Regression Test">
+        <packages>
+            <package name="com.exelenter.testcases"/>
+        </packages>
+        <classes>
+            <!--            <class name="com.exelenter.testcases.AddEmployeeTest">-->
+            <!--                <methods>-->
+            <!--                    <include name="addEmployeeTest"/>-->
+            <!--                </methods>-->
+            <!--            </class>-->
+            <!--            <class name="com.exelenter.testcases.LoginTest">-->
+            <!--                <methods>-->
+            <!--                    <include name="validAdminLogin"/>-->
+            <!--                    <include name="validUserInvalidPassword"/>-->
+            <!--                    <include name="validUserEmptyPassword"/>-->
+            <!--                </methods>-->
+            <!--            </class>-->
+            <!--            <class name="com.exelenter.testcases.LoginTestNegative">-->
+            <!--                <methods>-->
+            <!--                    <include name="userLogin"/>-->
+            <!--                </methods>-->
+            <!--            </class>-->
+        </classes>
+    </test>
+</suite>

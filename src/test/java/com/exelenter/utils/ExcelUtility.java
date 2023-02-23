@@ -37,8 +37,16 @@ public class ExcelUtility {
         return sheet.getRow(0).getLastCellNum();       // This method will return total count of columns.
     }
 
-    private static String getCell(int rowIndex, int columnIndex) {       // This method will read from a cell based on the index of given row and column.
-        return sheet.getRow(rowIndex).getCell(columnIndex).toString();
+    private static String getCell(int rowIndex, int columnIndex){
+        String cellValue = "";
+        try {
+            if (sheet.getRow(rowIndex).getCell(columnIndex) != null) {
+                cellValue = sheet.getRow(rowIndex).getCell(columnIndex).toString();
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Cell is empty at row " + rowIndex + " column " + columnIndex);
+        }
+        return cellValue;
     }
 
     public static Object[][] readFromExcel(String filePath, String sheetName) {

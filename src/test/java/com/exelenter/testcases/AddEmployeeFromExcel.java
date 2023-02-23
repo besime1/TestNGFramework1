@@ -1,10 +1,10 @@
 package com.exelenter.testcases;
 
 import com.exelenter.base.BaseClass;
+import com.exelenter.utils.ConfigsReader;
 import com.exelenter.utils.ExcelUtility;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 
 import static org.testng.Assert.assertEquals;
 
@@ -24,12 +24,12 @@ import static org.testng.Assert.assertEquals;
     BONUS: Specify a group name for this test case, and execute from the XML file.
  */
 public class AddEmployeeFromExcel extends BaseClass {
-
-    @Test(dataProvider = "readFromExcel", groups = {"smoke","regression", "excel"})
+    @Test(dataProvider = "readFromExcel", groups = {"regression", "excel"})
     public void addEmployeeTest(String firstName, String lastName, String userName, String password) {
-        loginPage.loginToWebsite("username", "password");
+        loginPage.loginToWebsite(ConfigsReader.getProperties("username"), ConfigsReader.getProperties("password"));
         wait(1);
         pimPage.navigateToAddEmployee();
+
         wait(1);
         sendText(addEmployeePage.firstName, firstName);         // Sophia
         sendText(addEmployeePage.lastName, lastName);           // Patel
@@ -86,9 +86,10 @@ public class AddEmployeeFromExcel extends BaseClass {
     // 2nd way: How to read data from Excel
     @DataProvider(name = "readFromExcel")
     public Object[][] getDataFromExcel() {
-        String absolutePath = ExcelUtility.projectPath + "/testData/ExelenterEmployeeList.xlsx";  //Don't forget slash in front of testData
+        String absolutePath = ExcelUtility.projectPath + "/src/test/java/resources/testdata/ExelenterEmployeeList.xlsx";  //Don't forget slash in front of testData
         return ExcelUtility.readFromExcel(absolutePath, "Employee");
     }
 
+    // By using your knowledge of Java, Selenium, and TestNG - you just retrieved data f
 }
 
