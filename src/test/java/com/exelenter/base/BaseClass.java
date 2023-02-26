@@ -5,6 +5,7 @@ import com.exelenter.utils.ConfigsReader;
 import com.exelenter.utils.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,7 +22,10 @@ public class BaseClass extends CommonMethods {
         switch (ConfigsReader.getProperties("browser").toLowerCase()) {
             case "chrome" -> {
                 System.setProperty("webdriver.chrome.driver.exe", Constants.CHROME_DRIVER_PATH);
-                driver = new ChromeDriver();
+                ChromeOptions options= new ChromeOptions();
+                options.addArguments("--headless");//run in headless mode
+                options.addArguments("--disable-logging");
+                driver = new ChromeDriver(options);
             }
             case "firefox" -> {
                 System.setProperty("webdriver.gecko.driver.exe", Constants.GECKO_DRIVER_PATH);

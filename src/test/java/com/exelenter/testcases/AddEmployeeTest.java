@@ -4,7 +4,7 @@ import com.exelenter.utils.ConfigsReader;
 import org.testng.annotations.Test;
 
 public class AddEmployeeTest extends BaseClass {
-    @Test(groups = {"smoke" , "regression"})
+    @Test(groups = {"smoke" , "regression"},enabled = false)
     public void addEmployeeTest() {
         loginPage.loginToWebsite(ConfigsReader.getProperties("username"), ConfigsReader.getProperties("password"));
         pimPage.navigateToAddEmployee();

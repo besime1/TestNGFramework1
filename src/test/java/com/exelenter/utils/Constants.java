@@ -8,4 +8,6 @@ public class Constants {
 
     public static  final String TESTDATA_FILEPATH = System.getProperty("user.dir") + "/src/test/java/resources/testdata/ExelenterEmployeeList.xlsx";
 
+    public static  final  String REPORT_FILEPATH =  System.getProperty("user.dir") + "/target/html-report/reports.html";
+
 }
