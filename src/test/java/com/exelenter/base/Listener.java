@@ -30,7 +30,8 @@ public class Listener implements ITestListener {
 
         test =reports.createTest(result.getName());
         test.pass("Test Case Passed" + result.getName());
-        test.addScreenCaptureFromPath(CommonMethods.takeScreenshot("PASS/" + result.getName()));
+        //optionally, you can capture screenshot here,for each success test case.Not recommended).
+        //test.addScreenCaptureFromPath(CommonMethods.takeScreenshot("PASS/" + result.getName()));
         test.log(Status.PASS,"Test Passed. This is coming from the log status");
 
     }

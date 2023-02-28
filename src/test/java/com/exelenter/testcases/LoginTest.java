@@ -29,7 +29,7 @@ public class LoginTest extends BaseClass {
         Assert.assertEquals(loginPage.loginErrorMessage.getText(), expectedErrorMessage, "Error message is incorrect");
     }
 
-    @Test(groups= "smoke")
+    @Test(groups= {"smoke","singleTest"})
     public void validUserEmptyPassword() {
         String expectedErrorMessage = "Password cannot be empty";
         sendText(loginPage.username, ConfigsReader.getProperties("username"));   // Valid Username, Password empty (skipped).

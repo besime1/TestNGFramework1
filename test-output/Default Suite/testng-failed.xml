@@ -6,9 +6,8 @@
       <class name="com.exelenter.testcases.LoginTest">
         <methods>
           <include name="tearDown"/>
-          <include name="validUserInvalidPassword"/>
+          <include name="validAdminLogin"/>
           <include name="setUp"/>
-          <include name="validUserEmptyPassword"/>
         </methods>
       </class> <!-- com.exelenter.testcases.LoginTest -->
     </classes>

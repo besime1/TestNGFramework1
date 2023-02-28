@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -19,20 +20,31 @@ public class BaseClass extends CommonMethods {
     public static WebDriver driver;
     @BeforeMethod(alwaysRun = true)
     public static void setUp() {
-       // System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "False");
-       // System.setProperty(ChromeDriverService.CHROME_DRIVER_APPEND_LOG_PROPERTY, "True");
+        System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+        System.setProperty(ChromeDriverService.CHROME_DRIVER_APPEND_LOG_PROPERTY, "True");
         ConfigsReader.loadProperties(Constants.CONFIGURATION_FILEPATH); // Replaced hard-coded filePath with Constants
+        String  headless=ConfigsReader.getProperties("headless");
         switch (ConfigsReader.getProperties("browser").toLowerCase()) {
             case "chrome" -> {
                 System.setProperty("webdriver.chrome.driver.exe", Constants.CHROME_DRIVER_PATH);
-                ChromeOptions options= new ChromeOptions();
-                options.addArguments("--headless");//run in headless mode
-                options.addArguments("--disable-logging");
-                driver = new ChromeDriver(options);
+                if (headless.equalsIgnoreCase("true")) {
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--headless");//run in headless mode
+                    options.addArguments("--disable-logging");
+                }else{
+                    driver = new ChromeDriver();
+                }
+
             }
             case "firefox" -> {
                 System.setProperty("webdriver.gecko.driver.exe", Constants.GECKO_DRIVER_PATH);
-                driver = new FirefoxDriver();
+                if (headless.equalsIgnoreCase("true")) {
+                    FirefoxOptions options = new FirefoxOptions();
+                    options.addArguments("---headless");
+                    driver = new FirefoxDriver(options);
+                } else {
+                    driver = new FirefoxDriver();
+                }
             }
             default -> throw new RuntimeException("Browser is not supported");
         }

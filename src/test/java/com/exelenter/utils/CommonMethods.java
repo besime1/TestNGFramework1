@@ -287,20 +287,26 @@ public class CommonMethods extends PageInitializer {
     }
 
     /**
-     * Method will take a screenshot when called. Extension defined as .png (You can change to .jpeg from CommonMethods when needed)
+     * This method will take a screenshot using older version of (v3) selenium. Extension defined as .png (You can change to .jpeg from CommonMethods when needed)
      * @param fileName String as screenshot name
      */
     public static String  takeScreenshot(String fileName) {
         TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
         File sourceFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(sourceFile, new File("screenshots/" + fileName + "_" + getTimeStamp()+ ".png"));
+            FileUtils.copyFile(sourceFile, new File("screenshots/" + fileName + "_" + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Screenshot is not taken");
         }
         return  fileName;
     }
+    /**
+     * This method will take a screenshot based on the given web element
+     * @param element which its screenshot needs to be taken
+     * @param fileName screenshot file name, Defaulted to .png format (can be changed to .jpeg within the method if needed).
+     * @return .png file as a String
+     */
     public  static String  takeScreenshot(WebElement element ,String fileName) {
         File sourceFile = element.getScreenshotAs(OutputType.FILE);
         try {
@@ -328,8 +334,9 @@ public class CommonMethods extends PageInitializer {
     }
     public  static String  getTimeStamp(){
         Date date =new Date();
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd_HH_mm_ss_ss");//YYYY-MM-DD-Hour-Min-Sec
-        return  simpleDateFormat.format(date.getTime());
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd_HH_mm_ss_SS");//YYYY-MM-DD-Hour-Min-Sec
+       return simpleDateFormat.format(date.getTime());
+
     }
 
 
