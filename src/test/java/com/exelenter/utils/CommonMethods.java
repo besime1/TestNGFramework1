@@ -1,6 +1,7 @@
 package com.exelenter.utils;
 
 import com.exelenter.base.PageInitializer;
+import freemarker.template.SimpleDate;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,7 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -291,13 +294,23 @@ public class CommonMethods extends PageInitializer {
         TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
         File sourceFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(sourceFile, new File("screenshots/" + fileName + ".png"));
+            FileUtils.copyFile(sourceFile, new File("screenshots/" + fileName + "_" + getTimeStamp()+ ".png"));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Screenshot is not taken");
         }
         return  fileName;
     }
+    public  static String  takeScreenshot(WebElement element ,String fileName) {
+        File sourceFile = element.getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(sourceFile, new File("screenshots/" + fileName + " _" + getTimeStamp() + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return fileName;
+    }
+
 
     public static String randomStrongPassWord(){
         String passWord = "";
@@ -313,4 +326,11 @@ public class CommonMethods extends PageInitializer {
         }
         return passWord;
     }
+    public  static String  getTimeStamp(){
+        Date date =new Date();
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd_HH_mm_ss_ss");//YYYY-MM-DD-Hour-Min-Sec
+        return  simpleDateFormat.format(date.getTime());
+    }
+
+
 }

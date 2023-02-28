@@ -5,6 +5,7 @@ import com.exelenter.utils.ConfigsReader;
 import com.exelenter.utils.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
@@ -18,6 +19,8 @@ public class BaseClass extends CommonMethods {
     public static WebDriver driver;
     @BeforeMethod(alwaysRun = true)
     public static void setUp() {
+       // System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "False");
+       // System.setProperty(ChromeDriverService.CHROME_DRIVER_APPEND_LOG_PROPERTY, "True");
         ConfigsReader.loadProperties(Constants.CONFIGURATION_FILEPATH); // Replaced hard-coded filePath with Constants
         switch (ConfigsReader.getProperties("browser").toLowerCase()) {
             case "chrome" -> {
